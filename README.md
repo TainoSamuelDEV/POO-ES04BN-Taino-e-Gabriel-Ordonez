@@ -28,6 +28,15 @@ Este repositório destina-se ao desenvolvimento de atividades, trabalhos e proje
 
 ---
 
+## 📂 Estrutura do Repositório
+```text
+├── src/          # Código-fonte das atividades e projetos
+├── docs/         # Documentações complementares e diagramas UML
+├── .gitignore    # Arquivos e diretórios ignorados pelo Git
+└── README.md     # Apresentação e guia do projeto
+```
+
+
 ## 📋 Como Executar o Projeto
 
 1. **Clonar o repositório:**
