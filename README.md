@@ -3,7 +3,7 @@
 Repositório da disciplina de **Programação Orientada a Objetos (POO)**.
 
 ## 👥 Integrantes
-- **Taíno**
+- **Taino Samuel**
 - **Gabriel Ordóñez**
 
 ## 📌 Turma / Bloco
