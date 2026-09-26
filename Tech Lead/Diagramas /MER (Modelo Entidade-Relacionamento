@@ -1,0 +1,33 @@
+Projeto Cedro - Modelo Entidade-Relacionamento (MER)
+
+Este documento explica como os dados do Projeto Cedro estão organizados no banco de dados. O objetivo desta estrutura é garantir que todo o fluxo de atendimento ao cliente funcione sem falhas: desde o momento em que o cliente dá a nota, até a resolução final do problema pela equipe responsável.
+
+🗂️ As Tabelas do Sistema (Entidades)
+
+O nosso sistema possui 8 tabelas principais. Abaixo está o que cada uma delas guarda:
+
+PESQUISA: É onde configuramos a pesquisa em si. Guarda o título, o período de validade, se ela está ativa e por qual canal será enviada.
+
+RESPOSTA: É o dado bruto que chega do cliente. Guarda a nota (de 1 a 5), o comentário digitado e a qual pesquisa ela pertence.
+
+MANIFESTAÇÃO: É o coração do sistema. É o "caso" que precisa ser resolvido. Guarda de qual unidade é a responsabilidade, quem é o responsável, o nível de prioridade e os prazos (quando foi criado e quando foi concluído).
+
+UNIDADE: Representa os departamentos da empresa. Guarda o nome do setor e quem é o gestor responsável por ele.
+
+USUÁRIO: É o cadastro de quem trabalha no sistema. Guarda nome, e-mail, perfil de acesso (Operador, Coordenador, etc.) e em qual Unidade essa pessoa trabalha.
+
+INTERAÇÃO: É o nosso histórico de auditoria. Toda vez que uma manifestação muda de status, essa tabela grava automaticamente o que mudou, quem (qual usuário) fez a mudança e a hora exata.
+
+RESPOSTA_DA_UNIDADE: Guarda o texto oficial com a tratativa (a solução) que o setor deu para o problema do cliente.
+
+ESCALONAMENTO: Guarda os registros de emergência. Se um caso passa do prazo ou precisa de atenção de um superior, é registrado aqui o motivo, o nível de urgência e quem fez o escalonamento.
+
+🔗 Como as tabelas se conectam (Regras de Negócio)
+
+Para o sistema funcionar, os dados precisam se relacionar seguindo estas três regras de ouro:
+
+Geração Exclusiva (1 para 1): Toda Resposta preenchida pelo cliente gera obrigatoriamente uma (e apenas uma) Manifestação. Isso impede que existam respostas perdidas ou casos duplicados.
+
+Encaminhamento Direto: Toda Manifestação precisa ter o ID de uma Unidade. Isso garante que o sistema saiba exatamente para qual departamento enviar aquele problema.
+
+Rastreio de Ações (Auditoria): As tabelas Interação, Resposta da unidade e Escalonamento são conectadas ao Usuário. Isso significa que o banco de dados nunca aceita uma mudança sem saber a "assinatura" (o ID) de quem apertou o botão.
